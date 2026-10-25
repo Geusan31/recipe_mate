@@ -15,18 +15,6 @@ export default function AppRouter() {
         <Route path="resep/:slug" element={<RecipeDetailPage />} />
         <Route path="kategori" element={<CategoriesPage />} />
         <Route path="kategori/:slug" element={<CategoryPage />} />
-        <Route path="cari" element={<SearchPage />} />
-        <Route path="favorit" element={<FavoritesPage />} />
-        <Route path="masak-dengan-bahan" element={<CookPage />} />
-        <Route path="perencana-makan" element={<PlannerPage />} />
-        <Route path="blog" element={<BlogPage />} />
-        <Route path="tentang" element={<AboutPage />} />
-        <Route path="kontak" element={<ContactPage />} />
-        <Route path="login" element={<AuthPage mode="login" />} />
-        <Route path="register" element={<AuthPage mode="register" />} />
-        <Route path="privasi" element={<LegalPage type="privacy" />} />
-        <Route path="syarat" element={<LegalPage type="terms" />} />
-        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
