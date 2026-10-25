@@ -69,11 +69,11 @@ function AuthForm({ mode }) {
         }
       />
 
-      <section className="mb-16">
+      <section className="mb-16 mx-auto max-w-120">
         <form
           onSubmit={handleSubmit}
           noValidate
-          className="flex max-w-[480px] flex-col gap-6 rounded-lg border border-gray-200 bg-white p-6"
+          className="flex w-full flex-col gap-6 rounded-lg border border-gray-200 bg-white p-6"
         >
           {isRegister && (
             <div className="flex flex-col gap-2">
