@@ -4,8 +4,10 @@ import HomePage from "../pages/HomePage";
 
 export default function AppRouter() {
   return (
-    <Routes element={<Layout />}>
-      <Route element={<HomePage />} />
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<HomePage />} />
+      </Route>
     </Routes>
   );
 }

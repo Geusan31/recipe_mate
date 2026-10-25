@@ -3,7 +3,7 @@ import RecipeGrid from "../components/recipe/RecipeGrid";
 import SearchBar from "../components/ui/SearchBar";
 import { categories } from "../data/categories";
 import { ingredients } from "../data/ingredients";
-import { recipes } from "../data/recipe";
+import { recipes } from "../data/recipes";
 
 function RecipeSection({ title, description, to, linkLabel, items }) {
   return (

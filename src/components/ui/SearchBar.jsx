@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { recipes } from "../../data/recipe";
+import { recipes } from "../../data/recipes";
 import Button from "./Button";
 
 export default function SearchBar({
