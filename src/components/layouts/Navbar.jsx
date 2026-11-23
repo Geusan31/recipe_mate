@@ -6,6 +6,7 @@ import Button from "../ui/Button";
 const links = [
   { to: "/", label: "Beranda", end: true },
   { to: "/resep", label: "Resep" },
+  { to: "/kelola-resep", label: "Kelola Resep" },
   { to: "/kategori", label: "Kategori" },
   { to: "/masak-dengan-bahan", label: "Masak Dengan Bahan" },
   { to: "/perencana-makan", label: "Perencana Makan" },

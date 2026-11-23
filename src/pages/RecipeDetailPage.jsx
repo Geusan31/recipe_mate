@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Button from "../components/ui/Button";
 import EmptyState from "../components/ui/EmptyState";
 import { useApp } from "../context/useApp";
@@ -13,7 +13,8 @@ import { readStorage, writeStorage } from "../lib/storage";
 
 export default function RecipeDetailPage() {
   const { slug } = useParams();
-  const recipe = getRecipe(slug);
+  const { recipes } = useApp();
+  const recipe = recipes?.find((r) => r.slug === slug || r.id === slug) ?? getRecipe(slug);
 
   if (!recipe) {
     return (
@@ -33,12 +34,24 @@ export default function RecipeDetailPage() {
 }
 
 function RecipeDetail({ recipe }) {
-  const { favorites, toggleFavorite, toast } = useApp();
+  const { favorites, toggleFavorite, toast, deleteRecipe } = useApp();
+  const navigate = useNavigate();
   const [factor, setFactor] = useState(1);
   const [checked, setChecked] = useState(() =>
     readStorage(`recipemate.check.${recipe.slug}`, {}),
   );
   const saved = favorites.includes(recipe.slug);
+
+  async function handleDeleteRecipe() {
+    if (window.confirm(`Hapus resep "${recipe.title}" dari backend?`)) {
+      try {
+        await deleteRecipe(recipe.id || recipe.slug);
+        navigate("/resep");
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+  }
 
   useEffect(() => {
     writeStorage(`recipemate.check.${recipe.slug}`, checked);
@@ -133,6 +146,16 @@ function RecipeDetail({ recipe }) {
             </Button>
             <Button variant="outline" onClick={copyLink}>
               Salin Tautan
+            </Button>
+            <Button variant="outline" to="/kelola-resep">
+              ✏️ Kelola Resep
+            </Button>
+            <Button
+              variant="outline"
+              className="border-rose-300 text-rose-700 hover:bg-rose-50"
+              onClick={handleDeleteRecipe}
+            >
+              🗑️ Hapus Resep
             </Button>
           </div>
         </div>

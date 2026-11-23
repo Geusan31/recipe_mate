@@ -1,11 +1,13 @@
 import { Link, useSearchParams } from "react-router-dom";
+import { useApp } from "../context/useApp";
 import RecipeFilters from "../components/recipe/RecipeFilters";
 import RecipeGrid from "../components/recipe/RecipeGrid";
 import EmptyState from "../components/ui/EmptyState";
 import PageHeader from "../components/ui/PageHeader";
 import SearchBar from "../components/ui/SearchBar";
+import Button from "../components/ui/Button";
 import { categories } from "../data/categories";
-import { recipes } from "../data/recipes";
+import { recipes as staticRecipes } from "../data/recipes";
 import { recipeMatches } from "../lib/recipe";
 
 const perPage = 6;
@@ -33,6 +35,7 @@ function matchesTime(time, filter) {
 }
 
 export default function RecipesPage() {
+  const { recipes = staticRecipes } = useApp();
   const [params, setParams] = useSearchParams();
 
   const filters = {
@@ -118,15 +121,20 @@ export default function RecipesPage() {
         <h2 className="mb-3 text-2xl font-bold">Filter Resep</h2>
         <RecipeFilters filters={filters} onChange={update} onReset={reset} />
 
-        <div className="mb-6">
-          <h2 className="mb-3 text-4xl font-extrabold leading-[1.2] text-gray-800">
-            Semua Resep
-          </h2>
-          <p className="text-lg text-gray-600">
-            {filtered.length
-              ? `Menampilkan ${filtered.length} resep`
-              : "Tidak ada resep yang cocok dengan filter tersebut"}
-          </p>
+        <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h2 className="mb-1 text-4xl font-extrabold leading-[1.2] text-gray-800">
+              Semua Resep
+            </h2>
+            <p className="text-lg text-gray-600">
+              {filtered.length
+                ? `Menampilkan ${filtered.length} resep`
+                : "Tidak ada resep yang cocok dengan filter tersebut"}
+            </p>
+          </div>
+          <Button to="/kelola-resep" className="self-start sm:self-auto px-4 py-2 text-sm font-semibold">
+            + Tambah Resep (Backend)
+          </Button>
         </div>
 
         {visibleRecipes.length ? (
